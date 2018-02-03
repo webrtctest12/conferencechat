@@ -43,7 +43,7 @@
 	    <input type="submit" name="login_submit" value="Log In">
 	</form>
 -->
-    <form name="loginForm" id="login" action="#" onsubmit="return errWrap(login,this);">
+    <!-- <form name="loginForm" id="login" action="#" onsubmit="return errWrap(login,this);">
         <span class="input input--nao">
             <input class="input__field input__field--nao" type="text" name="username" id="username" placeholder="Enter A Username"/>
                 <label class="input__label input__label--nao" for="username">
@@ -58,9 +58,15 @@
         <button class="cbutton cbutton--effect-radomir" type="submit" name="login_submit" value="Log In" style="margin-top: 40px; margin-left:-10px">
             <i class="cbutton__icon fa fa-fw fa fa-sign-in"></i>
         </button>
-    </form>
+	</form> -->
+	<form name="loginForm" id="login" action="#" onsubmit="return errWrap(login,this);">
+		<input type="text" name="username" id="username" placeholder="Enter A Username"/>
+		<button type="submit" name="login_submit" value="Log In" style="margin-top: 40px; margin-left:10px">
+			Login
+        </button>
+	</form>
 
-    <form name="callForm" id="call" action="#" onsubmit="return errWrap(makeCall,this);">
+    <!-- <form name="callForm" id="call" action="#" onsubmit="return errWrap(makeCall,this);">
         <span class="input input--nao">
             <input class="input__field input__field--nao" type="text" name="number" id="call" placeholder="Enter User To Call!"/>
 					<label class="input__label input__label--nao" for="number">
@@ -74,9 +80,14 @@
         <button class="cbutton cbutton--effect-radomir md-trigger" type="submit" value="Call" style="margin-top: 40px; margin-left:-10px" data-modal="modal-13">
             <i class="cbutton__icon fa fa-fw fa fa fa-phone-square"></i>
         </button>
+	</form> -->
+	<form name="callForm" id="call" action="#" onsubmit="return errWrap(makeCall,this);">
+		<input  type="text" name="number" id="call" placeholder="Enter User To Call!"/>
+		<button type="submit" value="Call" style="margin-top: 40px; margin-left:10px" data-modal="modal-13" value="Call">
+		Call
+		</button>
 	</form>
-
-	<div id="inCall" class="ptext">
+	<div id="inCall" style="margin-top:50px">
 		<button id="end" onclick="end()" >End</button>
         <button id="mute" onclick="mute()">Mute</button>
         <button id="pause" onclick="pause()">Pause</button>
@@ -84,9 +95,9 @@
 
 	<div id="logs" class="ptext"></div>
 
-<p class="ptext"><b>To Use:</b></p>
+<!-- <p class="ptext"><b>To Use:</b></p>
 <p class="ptext">Type a username and click Log in. If input turns green you are ready to receive/place a call.</p>
-<p class="ptext">In a separate browser window, log in with a different username, and place a call to the first.</p>
+<p class="ptext">In a separate browser window, log in with a different username, and place a call to the first.</p> -->
 
 <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
 <!-- WebRTC Peer Connections -->
@@ -105,8 +116,8 @@ var vidCount  = 0;
 function login(form) {
 	var phone = window.phone = PHONE({
 	    number        : form.username.value || "Anonymous", // listen on username line else Anonymous
-	    publish_key   : 'pub-c-d1c993b0-fe19-4455-88c2-5c518c791e63', // Your Pub Key
-	    subscribe_key : 'sub-c-12abef10-fd97-11e7-8c23-76e4b319f7ff', // Your Sub Key
+	    publish_key   : 'pub-c-561a7378-fa06-4c50-a331-5c0056d0163c', // Your Pub Key
+	    subscribe_key : 'sub-c-17b7db8a-3915-11e4-9868-02ee2ddab7fe', // Your Sub Key
 	});
 	var ctrl = window.ctrl = CONTROLLER(phone, get_xirsys_servers);
 	ctrl.ready(function(){
@@ -136,7 +147,7 @@ function makeCall(form){
 	if (phone.number()==num) return false; // No calling yourself!
 	ctrl.isOnline(num, function(isOn){
 		if (isOn) ctrl.dial(num);
-		else alert("User if Offline");
+		else alert("User is Offline");
 	});
 	return false;
 }
