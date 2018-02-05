@@ -116,8 +116,8 @@ var vidCount  = 0;
 function login(form) {
 	var phone = window.phone = PHONE({
 	    number        : form.username.value || "Anonymous", // listen on username line else Anonymous
-	    publish_key   : 'pub-c-561a7378-fa06-4c50-a331-5c0056d0163c', // Your Pub Key
-	    subscribe_key : 'sub-c-17b7db8a-3915-11e4-9868-02ee2ddab7fe', // Your Sub Key
+	    publish_key   : 'pub-c-d1c993b0-fe19-4455-88c2-5c518c791e63', // Your Pub Key
+	    subscribe_key : 'sub-c-12abef10-fd97-11e7-8c23-76e4b319f7ff', // Your Sub Key
 	});
 	var ctrl = window.ctrl = CONTROLLER(phone, get_xirsys_servers);
 	ctrl.ready(function(){
@@ -178,17 +178,13 @@ function addLog(log){
 
 function get_xirsys_servers() {
     var servers;
-    $.ajax({
-        type: 'POST',
-        url: 'https://service.xirsys.com/ice',
-        data: {
-            room: 'default',
-            application: 'default',
-            domain: 'kevingleason.me',
-            ident: 'gleasonk',
-            secret: 'b9066b5e-1f75-11e5-866a-c400956a1e19',
-            secure: 1,
-        },
+  $.ajax ({
+             url: "https://global.xirsys.net/_turn/testapp/",
+             type: "PUT",
+             async: false,
+             headers: {
+               "Authorization": "Basic " + btoa("carthi:62b08c6a-fa85-11e7-b759-8bc8c3ef0e14")
+             },
         success: function(res) {
 	        console.log(res);
             res = JSON.parse(res);
